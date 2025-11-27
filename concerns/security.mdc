@@ -1,0 +1,39 @@
+---
+description: Security practices for all code - load when working on auth, user input, or sensitive features
+alwaysApply: false
+---
+
+# Input Validation
+
+- Validate at system boundaries: API handlers, CLI args, env vars, file uploads.
+- Sanitize for context: HTML encoding for display, parameterized queries for SQL.
+- Reject invalid input early with clear errors. Never silently coerce.
+
+# Authentication & Authorization
+
+- Never roll your own auth—use established libraries (NextAuth, Clerk, Auth0, etc.).
+- Check authorization on every protected endpoint. Never trust client-side checks alone.
+- Session tokens: HttpOnly, Secure, SameSite=Strict. Short expiry + refresh tokens.
+
+# Secrets Management
+
+- Never hardcode secrets, tokens, or keys.
+- Env vars for config, external secret manager for sensitive credentials.
+- Rotate secrets regularly. Assume any committed secret is compromised.
+
+# Dependencies
+
+- Run `pnpm audit` / `go mod vulnerability` / `npm audit` regularly.
+- Pin versions. Review changelogs before major updates.
+- Minimize dependencies—each is an attack surface.
+
+# Data Protection
+
+- Encrypt at rest and in transit (TLS 1.3+).
+- PII: collect minimum necessary, document retention, enable deletion.
+- Logs: never log secrets, tokens, passwords, or full credit card numbers.
+
+# Security Headers (Web)
+
+- CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy.
+- Use helmet (Express) or Next.js security headers config.

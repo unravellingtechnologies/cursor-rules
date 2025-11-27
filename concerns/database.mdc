@@ -1,0 +1,39 @@
+---
+description: Database and SQL conventions - load when working with databases
+alwaysApply: false
+---
+
+# Migrations
+
+- One migration per logical change. Never modify existing migrations.
+- Migrations must be reversible (up + down).
+- Test migrations on production-like data before deploy.
+- Use migration tools: golang-migrate, Prisma, Drizzle, Knex.
+
+# Schema Design
+
+- Primary keys: prefer UUIDs or ULIDs over auto-increment for distributed systems.
+- Timestamps: `created_at`, `updated_at` on every table. Use `timestamptz`.
+- Soft deletes: `deleted_at` column when audit trail needed.
+- Foreign keys: always define with appropriate ON DELETE behavior.
+- Indexes: on foreign keys, frequently filtered columns, unique constraints.
+
+# SQL Style
+
+- Keywords uppercase: `SELECT`, `FROM`, `WHERE`, `JOIN`.
+- Table/column names: snake_case.
+- Explicit column lists—never `SELECT *` in application code.
+- Parameterized queries always. Never string concatenation for values.
+
+# Query Performance
+
+- Avoid N+1: use JOINs, batch queries, or DataLoader pattern.
+- EXPLAIN ANALYZE suspicious queries. Index based on actual query patterns.
+- Limit result sets. Paginate large collections.
+- Connection pooling: PgBouncer, built-in pool (Go: pgxpool, Node: pg pool).
+
+# ORM/Query Builders
+
+- Prefer query builders (Drizzle, sqlc, GORM) over raw strings.
+- Raw SQL for complex queries—ORMs aren't always optimal.
+- Type-safe queries: sqlc (Go), Prisma/Drizzle (TS).

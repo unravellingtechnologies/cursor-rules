@@ -1,0 +1,27 @@
+---
+description: Monorepo conventions for pnpm + Turborepo or multi-stack projects
+alwaysApply: false
+---
+
+# Stack Options
+
+This applies to two monorepo types:
+1. **TypeScript monorepo**: pnpm + Turborepo
+2. **Multi-stack**: Go + TypeScript (or other combinations)
+
+# TypeScript Monorepo (pnpm + Turbo)
+
+- Always use pnpm—never npm/yarn.
+- Run via turbo: `turbo dev`, `turbo build`, `turbo lint`. Avoid package-level scripts.
+- Structure: `/apps` (deployables), `/packages` (shared libs), `/infra` (Terraform).
+- Shared config: root tsconfig.json, eslint.config.js, turbo.json inheritance.
+- Hoist dependencies—never duplicate.
+- New package: update root package.json, pnpm-workspace.yaml, turbo.json pipelines.
+- Internal deps: use `"workspace:*"` protocol.
+
+# Multi-Stack Monorepo
+
+- Clear directory boundaries per language: `/services/go`, `/apps/web`, `/infra`.
+- Each stack follows its own toolchain rules (go.mod, package.json, etc.).
+- Shared tooling at root: Makefile or Taskfile for cross-stack commands.
+- CI pipelines: path-filtered triggers per stack.

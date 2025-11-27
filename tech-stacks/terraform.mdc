@@ -1,0 +1,36 @@
+---
+description: Terraform and Terragrunt rules for production-grade infrastructure
+globs: ["**/*.tf", "**/*.tfvars", "**/terragrunt.hcl"]
+---
+
+# Versioning
+
+- Pin Terraform: `required_version = ">= 1.9.0, < 2.0.0"`
+- Pin providers exactly: `~> X.Y.Z` (never `>=`).
+- Use Terragrunt for DRY config, remote state, dependency management.
+
+# Tooling
+
+- Run on every change: `terraform fmt -check`, `terraform validate`, tflint, tfsec, checkov.
+
+# Structure
+
+- One module per clear boundary (repo or directory).
+- Remote backend with locking + encryption (Terraform Cloud or S3+DynamoDB).
+- Locals for repeated values—never duplicate strings/numbers.
+- Variables: always `type`, `description`, `validation` blocks.
+- Outputs: explicitly typed and documented.
+- Secrets: `sensitive = true` + external secret manager. Never hardcode.
+
+# Naming
+
+- Resources: `<provider>_<type>_<name>` (e.g., `aws_s3_bucket_assets`).
+- Modules: kebab-case directories, `source = "git::..."` with ref pinning.
+- Tags: always include Environment, Project, Owner.
+
+# Safety
+
+- Never `-force` in automation.
+- `depends_on` only when implicit detection fails.
+- Destructive changes: separate plans with manual approval.
+- State and lock tables in separate accounts when possible.

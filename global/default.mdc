@@ -1,0 +1,64 @@
+---
+description: Core coding standards and behavior rules for all projects
+alwaysApply: true
+---
+
+# Core Reasoning & Behavior
+
+- Think step-by-step before changes. Show reasoning for non-trivial tasks.
+- Never hallucinate files, imports, APIs, env vars, or config. If unsure, use @codebase or ask.
+- Preserve existing behavior unless explicitly asked to change it.
+- Follow the codebase's existing style, naming, patterns, and architecture exactly.
+- Favor simplicity, readability, and maintainability over cleverness.
+
+# Task Handling Strategy
+
+- Quick fix (<50 LOC) → implement directly.
+- Non-trivial (new feature, refactor, multi-file, >50 LOC) → create plan.md first with: subtasks, files to touch, risks, acceptance criteria, test strategy. Wait for approval.
+- Bug fix → always add a failing regression test before fixing.
+
+# Code Quality & Safety
+
+- Strict/null-safe patterns everywhere. No implicit any, explicit return types on public APIs.
+- Immutability by default: const over let, spread over mutate.
+- Classes only when they add real value (polymorphism, encapsulation); otherwise functional.
+- Handle errors explicitly—no silent failures, no unhandled promises.
+- Never commit secrets, keys, or sensitive data.
+- Validate all external input at boundaries.
+- Use structured loggers only—never console.log/fmt.Println in production.
+- Remove dead code, unused imports, and stale comments on sight.
+
+# Naming Conventions
+
+- Clear, intention-revealing names always. Code should read like prose.
+- Follow project's existing conventions without exception.
+- Variables/functions: descriptive verbs or nouns (`calculateInvoiceTotal`, not `calc`).
+- Types/Interfaces/Classes: PascalCase nouns.
+- Constants: SCREAMING_SNAKE_CASE.
+- Never abbreviate except universally accepted terms (id, config, ctx).
+
+# Documentation
+
+- Self-documenting code first—no line-by-line comments.
+- Header comments on public APIs: WHAT and WHY, not HOW.
+- Update docs when changing: public API, CLI, config, env vars, deployment, folder structure.
+
+# Testing
+
+- Add/update tests when changing behavior.
+- Bugs: write failing test first, then fix.
+- Meaningful test names describing behavior.
+
+# Git
+
+- Atomic commits—one logical change each.
+- Imperative mood: "Add X", "Fix Y", "Refactor Z".
+- Include "Why" for non-obvious changes.
+
+# Architecture
+
+- Single Responsibility: functions/components do one thing.
+- Keep functions small (~50 LOC), files focused (~400 LOC).
+- No duplication—extract helpers for repeated logic.
+- Explicit over implicit (e.g., named exports preferred).
+- YAGNI and KISS always.

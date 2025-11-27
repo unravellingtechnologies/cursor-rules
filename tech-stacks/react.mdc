@@ -1,0 +1,38 @@
+---
+description: React and Next.js specific patterns and best practices
+globs: ["**/*.tsx", "**/*.jsx"]
+---
+
+# Components
+
+- Functional components + hooks only. No classes.
+- One component per file (collocated styles/tests OK).
+- Props interface above component, named `<Component>Props`.
+- Destructure props in function signature.
+
+# Next.js
+
+- React Server Components by default. Client components only when needed (`"use client"`).
+- App Router preferred. Pages Router only for legacy.
+- Server Actions for mutations. API routes for external integrations.
+- Metadata API for SEO. Never manual `<head>` manipulation.
+
+# State & Data
+
+- Server state: TanStack Query (React Query) or SWR.
+- Client state: useState for local, Zustand for shared. Redux only if already in codebase.
+- Derive state where possible—avoid redundant useState.
+
+# Patterns
+
+- Custom hooks for reusable logic (prefix `use`).
+- Memoization: useMemo/useCallback only for measured performance issues.
+- Error boundaries at route/feature level.
+- Suspense for async UI with meaningful fallbacks.
+
+# Accessibility
+
+- Semantic HTML first (button, nav, main, etc.).
+- Interactive elements: keyboard accessible, focus visible.
+- Images: meaningful alt text or `alt=""` for decorative.
+- Form inputs: always associated labels.

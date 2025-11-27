@@ -1,0 +1,38 @@
+---
+description: Logging, metrics, and tracing conventions - load when adding observability
+alwaysApply: false
+---
+
+# Structured Logging
+
+- JSON format in production. Human-readable in dev.
+- Log levels: debug (dev only), info (normal ops), warn (recoverable), error (failures).
+- Include: timestamp, level, message, requestId/traceId, relevant context.
+- Never log: secrets, tokens, passwords, PII, full request/response bodies.
+
+# What to Log
+
+- Request start/end with duration and status.
+- External service calls (DB, APIs) with timing.
+- Business events (user signup, order placed).
+- Errors with stack traces and context.
+
+# Metrics
+
+- RED method for services: Rate, Errors, Duration.
+- USE method for resources: Utilization, Saturation, Errors.
+- Custom metrics: business KPIs, queue depths, cache hit rates.
+- Histogram for latencies, counter for events, gauge for current state.
+
+# Distributed Tracing
+
+- Propagate trace context across service boundaries.
+- Span per: HTTP handler, DB query, external call.
+- Include relevant attributes: user_id, order_id, etc.
+- OpenTelemetry for vendor-neutral instrumentation.
+
+# Alerting
+
+- Alert on symptoms (high error rate, latency), not causes.
+- Actionable alerts only—every alert should have a runbook.
+- Severity levels: page (immediate), ticket (business hours), log (info).

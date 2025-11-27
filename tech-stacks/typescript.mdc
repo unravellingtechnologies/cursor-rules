@@ -1,0 +1,35 @@
+---
+description: TypeScript-specific rules for strict, production-grade code
+globs: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"]
+---
+
+# Tooling
+
+- ESLint + Prettier with `@typescript-eslint/recommended-type-checked`.
+- Run `tsc --noEmit` and eslint before commit—never commit failing code.
+- pnpm workspaces in monorepos; consistent `"type": "module"` in package.json.
+
+# Type Safety
+
+- Explicit return types on all exported functions.
+- Interfaces for object shapes (extensible), types for unions/intersections.
+- Never `any`—use `unknown` + type guards.
+- Runtime validation: Zod for all external input (API, env, config).
+- Env vars: validate with zod-env or equivalent. Never raw `process.env.X`.
+
+# Patterns
+
+- Default exports forbidden except main entry points or Next.js pages.
+- Barrel files (index.ts) only when re-exporting >5 items with clear value.
+- Prefer `as const` objects or string unions over enums.
+
+# Logging & Errors
+
+- Structured logging with pino. Never console.log in production.
+- Error classes extend Error with `cause` when wrapping.
+
+# Testing
+
+- Vitest + React Testing Library (for UI).
+- Co-locate tests unless complex (then `__tests__/`).
+- Factory functions or fixtures for complex setup.
