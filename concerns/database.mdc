@@ -15,7 +15,7 @@ alwaysApply: false
 - Primary keys: prefer UUIDs or ULIDs over auto-increment for distributed systems.
 - Timestamps: `created_at`, `updated_at` on every table. Use `timestamptz`.
 - Soft deletes: `deleted_at` column when audit trail needed.
-- Foreign keys: always define with appropriate ON DELETE behavior.
+- Foreign keys: always define with appropriate ON DELETE behaviour.
 - Indexes: on foreign keys, frequently filtered columns, unique constraints.
 
 # SQL Style

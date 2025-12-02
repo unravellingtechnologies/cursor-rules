@@ -1,13 +1,13 @@
 ---
-description: Core coding standards and behavior rules for all projects
+description: Core coding standards and behaviour rules for all projects
 alwaysApply: true
 ---
 
-# Core Reasoning & Behavior
+# Core Reasoning & behaviour
 
 - Think step-by-step before changes. Show reasoning for non-trivial tasks.
 - Never hallucinate files, imports, APIs, env vars, or config. If unsure, use @codebase or ask.
-- Preserve existing behavior unless explicitly asked to change it.
+- Preserve existing behaviour unless explicitly asked to change it.
 - Follow the codebase's existing style, naming, patterns, and architecture exactly.
 - Favor simplicity, readability, and maintainability over cleverness.
 
@@ -45,9 +45,9 @@ alwaysApply: true
 
 # Testing
 
-- Add/update tests when changing behavior.
+- Add/update tests when changing behaviour.
 - Bugs: write failing test first, then fix.
-- Meaningful test names describing behavior.
+- Meaningful test names describing behaviour.
 
 # Git
 

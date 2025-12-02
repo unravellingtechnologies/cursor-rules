@@ -16,11 +16,11 @@ cp /path/to/cursor-rules/tech-stacks/typescript.mdc .cursor/rules/
 cp /path/to/cursor-rules/tech-stacks/react.mdc .cursor/rules/
 ```
 
-## Rule Loading Behavior
+## Rule Loading behaviour
 
 Rules are loaded based on their **frontmatter configuration**:
 
-| Frontmatter | Behavior |
+| Frontmatter | behaviour |
 |-------------|----------|
 | `alwaysApply: true` | Always loaded for every file |
 | `globs: ["**/*.ts"]` | Loaded only when editing matching files |
